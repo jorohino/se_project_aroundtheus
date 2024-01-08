@@ -1,7 +1,7 @@
 .profile {
   display: flex;
   align-items: center;
-  padding-top: 40px;
+  padding-top: 36.25px;
   margin: 0 auto;
 }
 
@@ -44,7 +44,7 @@
   height: 24px;
   width: 24px;
   grid-area: button;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: #fff;
   border-radius: 1px;
@@ -103,6 +103,11 @@
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+    padding-top: 26px;
+  }
+
+  .profile__pfp {
+    margin: 0 auto;
   }
 
   .profile__title {
