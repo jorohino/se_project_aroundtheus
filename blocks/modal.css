@@ -109,9 +109,9 @@
   .modal__container {
     padding: 25px 20px;
   }
-  .modal__close {
+  .modal__close-button {
     bottom: calc(100% + 20px);
-    left: 90%;
+    left: calc(100% - 26px);
     width: 26px;
     height: 26px;
   }
