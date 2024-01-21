@@ -28,15 +28,50 @@ const initialCards = [
 const editButton = document.querySelector("#profile__edit-button");
 const modal = document.querySelector("#modal");
 const modalCloseButton = modal.querySelector("#modal__close-button");
+const profileName = document.querySelector("#profile__name");
+const profileNameInput = document.querySelector("#form__name-input");
+const profileDescriptionInput = document.querySelector(
+  "#form__description-input"
+);
+const profileDescription = document.querySelector("#profile__description");
+const profileEditForm = document.querySelector("#modal__form");
+const profileEditSubmit = document.querySelector("#modal__save");
+const cardTemplate = document.querySelector("#cards__list-template").content;
+const cardsListElement = document.querySelector("#cards__list");
 
 function modalOpen() {
   modal.classList.add("modal_opened");
+  profileNameInput.value = profileName.textContent;
+  profileDescriptionInput.value = profileDescription.textContent.trim();
 }
 
 function modalClose() {
   modal.classList.remove("modal_opened");
 }
 
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = profileNameInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+}
+
+initialCards.forEach((data) => {
+  const cardElement = getCardElement(data);
+  cardsListElement.append(cardElement);
+});
+
+function getCardElement(data) {
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImageElement = cardElement.querySelector(".card__image");
+  const cardTitleElement = cardElement.querySelector(".card__title");
+  cardTitleElement.textContent = data.name;
+  cardImageElement.alt = data.name;
+  cardImageElement.src = data.link;
+  return cardElement;
+}
+
 editButton.addEventListener("click", modalOpen);
 
 modalCloseButton.addEventListener("click", modalClose);
+
+profileEditSubmit.addEventListener("click", handleProfileFormSubmit);
