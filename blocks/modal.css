@@ -1,5 +1,5 @@
 .modal {
-  display: flex;
+  display: none;
   position: fixed;
   top: 0;
   right: 0;
@@ -8,7 +8,6 @@
   z-index: 99;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 19px;
-  visibility: hidden;
   opacity: 0;
   transition: visibility 3s linear 0.5s;
 }
@@ -42,7 +41,7 @@
   margin: 0 auto 0 0;
 }
 
-.modal__close {
+.modal__close-button {
   background-image: url(../images/Close\ Icon.svg);
   background-color: transparent;
   background-repeat: no-repeat;
@@ -56,7 +55,7 @@
   cursor: pointer;
 }
 
-.modal__close:hover {
+.modal__close-button:hover {
   opacity: 0.6;
 }
 
