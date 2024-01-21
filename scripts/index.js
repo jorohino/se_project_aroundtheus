@@ -74,5 +74,3 @@ function getCardElement(data) {
 editButton.addEventListener("click", openModal);
 
 modalCloseButton.addEventListener("click", closeModal);
-
-profileEditSubmit.addEventListener("submit", handleProfileFormSubmit);
