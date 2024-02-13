@@ -40,7 +40,7 @@ const profileDescriptionInput = document.querySelector(
   "#form__description-input"
 );
 const profileDescription = document.querySelector("#profile__description");
-const profileEditForm = document.querySelector("#edit-modal__form");
+const profileEditForm = document.forms["edit-modal__form"];
 const profileEditSubmit = document.querySelector("#edit-modal__save");
 
 /*  --Card List Modal DECLARATIONS--  */
@@ -49,7 +49,7 @@ const addButton = document.querySelector("#profile__add-button");
 const addModal = document.querySelector("#add-modal");
 const addModalCloseButton = document.querySelector("#add-modal__close-button");
 const addModalSaveButton = document.querySelector("#add-modal__save");
-const addModalForm = document.querySelector("#add-modal__form");
+const addModalForm = document.forms["add-modal__form"];
 const cardTitleInput = document.querySelector("#form__title-input");
 const cardURLInput = document.querySelector("#form__url-input");
 const cardsListElement = document.querySelector("#cards__list");
