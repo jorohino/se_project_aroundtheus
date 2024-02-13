@@ -1,5 +1,5 @@
 .modal {
-  display: none;
+  display: flex;
   position: fixed;
   top: 0;
   right: 0;
@@ -9,14 +9,27 @@
   background-color: rgba(0, 0, 0, 0.5);
   padding: 19px;
   opacity: 0;
-  transition: visibility 3s linear 0.5s;
+  visibility: hidden;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
 }
 
 .modal_opened {
   display: flex;
   visibility: visible;
   opacity: 1;
-  transition-delay: 3s;
+  transition-delay: 0s;
+}
+
+.popup-modal {
+  visibility: hidden;
+  display: flex;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 999;
+  padding: 0 19px;
 }
 
 .modal__container {
@@ -41,6 +54,29 @@
   margin: 0 auto 0 0;
 }
 
+.popup-modal__container {
+  margin: auto;
+  position: relative;
+}
+
+.popup-modal__title {
+  position: absolute;
+  margin: auto;
+  bottom: -25px;
+  left: 0;
+  font-family: 'Inter', Arial, 'Times New Roman';
+  font-weight: 400;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 1);
+  width: 291px;
+  line-height: 14px;
+}
+
+.popup-modal__image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
 .modal__close-button {
   background-image: url(../images/Close\ Icon.svg);
   background-color: transparent;
@@ -52,6 +88,17 @@
   left: calc(100% + 5px);
   width: 40px;
   height: 40px;
+  cursor: pointer;
+}
+
+.popup-modal__close-button {
+  background: transparent url(../images/Close\ Icon.svg) center no-repeat;
+  width: 40px;
+  height: 40px;
+  border: none;
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: calc(100% + 5px);
   cursor: pointer;
 }
 
@@ -89,6 +136,7 @@
 
 .modal__form-label::placeholder {
   color: #000;
+  opacity: 0.7;
 }
 
 .modal__save {

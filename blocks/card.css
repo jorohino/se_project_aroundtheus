@@ -13,6 +13,7 @@
   margin: 0;
   object-fit: fill;
   border-radius: 10px 10px 0 0;
+  cursor: pointer;
 }
 
 .card__description {
@@ -20,7 +21,7 @@
   align-items: center;
   justify-content: space-between;
   max-width: 280px;
-  padding: 25px 20px;
+  padding: 10px 20px 25px;
 }
 
 .card__title {
@@ -34,6 +35,8 @@
 
 .card__like-button {
   background: transparent url(../images/Heart\ Button.svg) center no-repeat;
+  /*Activated button CSS below*/
+  /*background: transparent url(../images/Heart\ Button__Activated.svg) center no-repeat;*/
   width: 21px;
   height: 18px;
   margin: 0;
@@ -45,5 +48,29 @@
 
 .card__like-button:hover {
   opacity: 0.5;
+  cursor: pointer;
+}
+
+.card__like-button_active {
+  background-image: url(../images/Heart\ Button__Activated.svg);
+}
+
+.card__delete-button {
+  background: transparent url(../images/Trash\ Button.svg) center no-repeat;
+  width: 18px;
+  height: 19px;
+  z-index: 99;
+  position: relative;
+  bottom: 265px;
+  left: 250px;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.card__delete-button:hover {
+  opacity: 0.6;
   cursor: pointer;
 }
