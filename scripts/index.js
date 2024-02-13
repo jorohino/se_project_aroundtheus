@@ -60,6 +60,9 @@ const popupModalCloseButton = document.querySelector('#popup-modal__close-button
 /*FUNCTIONS*/
 
 /*Card rendering functions*/
+function openPopupModal(popupModal) {
+  popupModal.classList.add("modal_opened");
+};
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -75,7 +78,7 @@ function getCardElement(cardData) {
 });
 
 cardImageElement.addEventListener("click", () => {
-  openPopupModal(popupModal);
+  openPopupModal();
   popupModalImage.src = cardData.link;
   popupModalImage.alt = cardData.name;
   popupModalTitle.textContent = cardData.name;
@@ -123,9 +126,6 @@ function renderCard(cardData) {
   cardsListElement.prepend(cardElement);
 }
 
-/*Like + Delete Functions*/
-
-
 /*EVENT LISTENERS*/
 
 profileEditForm.addEventListener("submit", (e) => {
@@ -150,5 +150,7 @@ editModalCloseButton.addEventListener("click", closeEditModal);
 addButton.addEventListener("click", openAddModal);
 
 addModalCloseButton.addEventListener("click", closeAddModal);
+
+popupModalCloseButton.addEventListener("click", closePopupModal);
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsListElement));

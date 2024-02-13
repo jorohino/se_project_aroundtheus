@@ -56,25 +56,25 @@
 
 .popup-modal__container {
   margin: auto;
-  padding: 0;
   position: relative;
 }
 
 .popup-modal__title {
   position: absolute;
-  bottom: -30px;
+  margin: auto;
+  bottom: -25px;
+  left: 0;
   font-family: 'Inter', Arial, 'Times New Roman';
   font-weight: 400;
   font-size: 12px;
   color: rgba(255, 255, 255, 1);
   width: 291px;
   line-height: 14px;
-
 }
 
 .popup-modal__image {
   max-width: 75vw;
-  max-height: 75vw;
+  max-height: 75vh;
 }
 
 .modal__close-button {
@@ -88,6 +88,17 @@
   left: calc(100% + 5px);
   width: 40px;
   height: 40px;
+  cursor: pointer;
+}
+
+.popup-modal__close-button {
+  background: transparent url(../images/Close\ Icon.svg) center no-repeat;
+  width: 40px;
+  height: 40px;
+  border: none;
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: calc(100% + 5px);
   cursor: pointer;
 }
 
