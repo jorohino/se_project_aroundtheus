@@ -91,17 +91,6 @@
   cursor: pointer;
 }
 
-.popup-modal__close-button {
-  background: transparent url(../images/Close\ Icon.svg) center no-repeat;
-  width: 40px;
-  height: 40px;
-  border: none;
-  position: absolute;
-  bottom: calc(100% + 5px);
-  left: calc(100% + 5px);
-  cursor: pointer;
-}
-
 .modal__close-button:hover {
   opacity: 0.6;
 }
