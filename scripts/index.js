@@ -141,6 +141,7 @@ addModalForm.addEventListener("submit", (e) => {
   const link = cardURLInput.value;
   renderCard({name, link}, cardsListElement);
   closeAddModal();
+  addModalForm.reset(); 
 })
 
 editButton.addEventListener("click", openEditModal);
