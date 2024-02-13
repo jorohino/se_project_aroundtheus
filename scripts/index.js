@@ -29,6 +29,8 @@ const initialCards = [
 
 /*    ---OPENING DECLARATIONS---    */
 
+const closeButtons = document.querySelectorAll(".modal__close-button");
+
 /*  --Profile Modal DECLARATIONS--  */
 
 const editButton = document.querySelector("#profile__edit-button");
@@ -133,20 +135,13 @@ editButton.addEventListener("click", () => {
   openModal(editModal);
 });
 
-editModalCloseButton.addEventListener("click", () => {
-  closeModal(editModal);
-});
-
 addButton.addEventListener("click", () => {
   openModal(addModal);
 });
 
-addModalCloseButton.addEventListener("click", () => {
-  closeModal(addModal);
-});
-
-popupModalCloseButton.addEventListener("click", () => {
-  closeModal(popupModal);
-});
+closeButtons.forEach((button) => {
+  const modal = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(modal));
+})
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsListElement));
