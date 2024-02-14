@@ -132,6 +132,8 @@ addModalForm.addEventListener("submit", (e) => {
 })
 
 editButton.addEventListener("click", () => {
+  profileNameInput.value = profileName.textContent;
+  profileDescriptionInput.value.trim() = profileDescription.textContent;
   openModal(editModal);
 });
 
