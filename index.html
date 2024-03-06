@@ -8,7 +8,7 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Around the U.S.</title>
-    <link href="./pages/index.css" rel="stylesheet" />
+    <link href="./pages/index.css" type="text/css" rel="stylesheet" />
   </head>
   <body class="page">
     <div class="page__content">
@@ -54,7 +54,7 @@
                   class="card__delete-button"
                   type="button"
                   aria-label="Delete"
-                  ></button>
+                ></button>
                 <div class="card__description">
                   <h2 class="card__title"></h2>
                   <button
@@ -87,21 +87,36 @@
             type="text"
             name="title"
             id="form__name-input"
-            class="modal__form-label"
+            class="modal__input modal__input_type_profile-name"
             placeholder="Name"
+            maxlength="40"
+            minlength="2"
+            required
           />
+          <span
+            class="modal__input_type_error"
+            id="form__name-input-error"
+          ></span>
           <input
             type="text"
             name="description"
             id="form__description-input"
-            class="modal__form-label"
+            class="modal__input modal__input_type_profile-description"
             placeholder="Description"
+            maxlength="200"
+            minlength="2"
+            required
           />
+          <span
+            class="modal__input_type_error"
+            id="form__description-input-error"
+          ></span>
           <button
             type="submit"
             id="edit-modal__save"
-            class="modal__save"
+            class="modal__save modal__save_disabled"
             aria-label="Save profile edits"
+            disabled
           >
             Save
           </button>
@@ -109,7 +124,7 @@
       </div>
     </div>
     <!--Add Card Modal-->
-    <div class="modal" id="add-modal" name="add-modal__form">
+    <div class="modal" id="add-modal">
       <div class="modal__container">
         <button
           type="button"
@@ -123,23 +138,34 @@
             type="text"
             name="title"
             id="form__title-input"
-            class="modal__form-label"
+            class="modal__input modal__input_type_add-title"
             placeholder="Title"
+            maxlength="30"
+            minlength="2"
             required
           />
+          <span
+            class="modal__input_type_error modal__error_visible"
+            id="form__title-input-error"
+          ></span>
           <input
             type="url"
             name="url"
             id="form__url-input"
-            class="modal__form-label"
+            class="modal__input modal__input_type_add-url"
             placeholder="Image URL"
             required
           />
+          <span
+            class="modal__input_type_error modal__error_visible"
+            id="form__url-input-error"
+          ></span>
           <button
             type="submit"
             id="add-modal__save"
-            class="modal__save"
+            class="modal__save modal__save_disabled"
             aria-label="Create new place"
+            disabled
           >
             Create
           </button>
@@ -148,11 +174,16 @@
     </div>
     <div class="modal" id="popup-modal">
       <div class="popup-modal__container">
-          <button type="button" class="modal__close-button" id="popup-modal__close-button"></button>
-          <img class="popup-modal__image" src="#" alt="#" />
-          <p class="popup-modal__title"></p>
+        <button
+          type="button"
+          class="modal__close-button"
+          id="popup-modal__close-button"
+        ></button>
+        <img class="popup-modal__image" src="#" alt="#" />
+        <p class="popup-modal__title"></p>
       </div>
     </div>
-    <script src="./scripts/index.js"></script>
+    <script defer src="./scripts/index.js"></script>
+    <script defer src="./scripts/validation.js"></script>
   </body>
 </html>
