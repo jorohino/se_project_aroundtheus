@@ -30,7 +30,7 @@ const initialCards = [
 /*    ---OPENING DECLARATIONS---    */
 
 const closeButtons = document.querySelectorAll(".modal__close-button");
-
+const modals = document.querySelectorAll(".modal");
 /*  --Profile Modal DECLARATIONS--  */
 
 const editButton = document.querySelector("#profile__edit-button");
@@ -102,16 +102,39 @@ function getCardElement(cardData) {
 
 function openModal(modal) {
 modal.classList.add("modal_opened");
-}
-
-function closeModal(modal) {
-modal.classList.remove("modal_opened");
+document.addEventListener("keydown", handleEscape);
 }
 
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardsListElement.prepend(cardElement);
 }
+
+/** --Close Functions-- **/
+
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscape);
+  }
+  
+function handleEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
+  }
+}
+
+function handleClickOverlay() {
+ modals.forEach((modal) => {
+  modal.addEventListener("mousedown", (evt) => {
+    if (evt.target === modal) {
+      closeModal(modal);
+    }
+  });
+ });
+ }
+
+ handleClickOverlay();
 
 /*      ---EVENT LISTENERS---      */
 

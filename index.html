@@ -82,7 +82,7 @@
           aria-label="Close profile edit window"
         ></button>
         <h2 class="modal__title">Edit Profile</h2>
-        <form class="modal__form" id="edit-modal__form" name="edit-modal__form">
+        <form class="modal__form" id="edit-modal__form" name="edit-modal__form" novalidate>
           <input
             type="text"
             name="title"
@@ -94,7 +94,7 @@
             required
           />
           <span
-            class="modal__input_type_error"
+            class="modal__error"
             id="form__name-input-error"
           ></span>
           <input
@@ -108,7 +108,7 @@
             required
           />
           <span
-            class="modal__input_type_error"
+            class="modal__error"
             id="form__description-input-error"
           ></span>
           <button
@@ -133,7 +133,7 @@
           aria-label="Close 'add new place' window"
         ></button>
         <h2 class="modal__title">New Place:</h2>
-        <form class="modal__form" id="add-modal__form">
+        <form class="modal__form" id="add-modal__form" novalidate>
           <input
             type="text"
             name="title"
@@ -145,7 +145,7 @@
             required
           />
           <span
-            class="modal__input_type_error modal__error_visible"
+            class="modal__error"
             id="form__title-input-error"
           ></span>
           <input
@@ -157,7 +157,7 @@
             required
           />
           <span
-            class="modal__input_type_error modal__error_visible"
+            class="modal__error"
             id="form__url-input-error"
           ></span>
           <button
