@@ -1,3 +1,5 @@
+import Card from "../components/Card.js";
+
 /*      ---INITIAL CARDS---     */
 
 const initialCards = [
@@ -27,6 +29,13 @@ const initialCards = [
   },
 ];
 
+const cardData = {
+  name: "Miami",
+  link: "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+}
+
+const card = new Card(cardData, '#cards__list-template');
+card.getView();
 /*    ---OPENING DECLARATIONS---    */
 
 const closeButtons = document.querySelectorAll(".modal__close-button");

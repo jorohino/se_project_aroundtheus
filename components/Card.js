@@ -1,4 +1,46 @@
-const cardEl = cardTemplate.cloneNode(true);
+export default class Card {
+    constructor({name, link}, cardSelector, handleImageClick) {
+        this._name = name;
+        this._link = link;
+        this._cardSelector = cardSelector;
+        this._handleImageClick = handleImageClick;
+    }
+
+    _setEventListeners() {
+        this._cardEl.querySelector('.card__like-button').addEventListener('click', () => {
+            this._handleLikeButton()
+        });
+        this._cardEl.querySelector('.card__delete-button').addEventListener('click', () => {
+            this._handleDeleteButton()
+        });
+        this._cardEl.querySelector('.card__image').addEventListener('click', () => {
+            this._handleImageClick()
+        })
+    }
+
+    _handleLikeButton() {
+        this._cardEl.querySelector('.card__like-button').classList.toggle('card__like-button_active');
+    }
+
+    _handleDeleteButton() {
+        this._cardEl.remove();
+        this._cardEl = null;
+    }
+
+    getView() {
+        this._cardEl = document
+        .querySelector(this._cardSelector)
+        .content.querySelector('.card')
+        .cloneNode(true);
+        //get the card view
+        this._setEventListeners();
+        //return card
+    }
+}
+
+/*
+
+
 const cardImageEl = cardEl.querySelector('.card__image');
 const cardTitleEl = cardEl.querySelector('.card__title');
 const likeButton = cardEl.querySelector('.card__like-button');
@@ -21,14 +63,7 @@ class Card {
 }
 
     //Private method that sets the necessary event listeners
-    _setEventListeners() {
-        // assign each of the parameters to `this` as private fields
-        this._data = 
-        // ...
-        this._cardImageElement.addEventListener('click', () => {
-            this._handleImageClick(this);
-        })
-    }
+    
 
     // private method for the delete and like button handlers (since the image click handler is 
     ////passed as an argument, you won't create a corresponding method inside the Card class)
@@ -42,3 +77,5 @@ class Card {
 
     //public method that returns a fully functional card element populated with the appropriate data.
 }
+
+*/
