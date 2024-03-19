@@ -34,8 +34,6 @@ const cardData = {
   link: "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 }
 
-const card = new Card(cardData, '#cards__list-template');
-card.getView();
 /*    ---OPENING DECLARATIONS---    */
 
 const closeButtons = document.querySelectorAll(".modal__close-button");
@@ -80,7 +78,8 @@ const popupModalTitle = document.querySelector(".popup-modal__title");
 /*  --Card rendering functions--  */
 
 function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
+  return new Card(cardData, '#cards__list-template').getView();
+ /* const cardElement = cardTemplate.cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardTitleElement = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
@@ -105,6 +104,7 @@ function getCardElement(cardData) {
   cardImageElement.alt = cardData.name;
   cardImageElement.src = cardData.link;
   return cardElement;
+  */
 }
 
 /*  --Modal Functions-- */
