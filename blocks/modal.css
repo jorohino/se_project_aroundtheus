@@ -128,7 +128,7 @@
   opacity: 0.7;
 }
 
-.modal__input:invalid {
+.modal__input_invalid {
   border-bottom: 1px solid #ff0000;
   margin-bottom: 5px;
 }
@@ -145,6 +145,10 @@
   border-radius: 2px;
   cursor: pointer;
   width: 358px;
+}
+
+.modal__save:hover {
+  opacity: 0.8;
 }
 
 .modal__save_disabled {

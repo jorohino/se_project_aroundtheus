@@ -27,6 +27,7 @@ export default class FormValidator {
             `#${inputEl.id}-error`
         );
         inputEl.classList.remove(this._errorClass);
+        inputEl.classList.remove("this._modal__input_invalid");
         errorEl.classList.remove(this._errorClass);
         errorEl.textContent = "";
     };
@@ -36,6 +37,7 @@ export default class FormValidator {
             `#${inputEl.id}-error`
         );
         inputEl.classList.add(this._errorClass);
+        inputEl.classList.add("this._modal__input_invalid");
         errorEl.textContent = errorMessage;
         errorEl.classList.add(this._errorClass);
     };
