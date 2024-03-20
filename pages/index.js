@@ -89,7 +89,9 @@ const popupModalTitle = document.querySelector(".popup-modal__title");
 /*  --Card rendering functions--  */
 
 function getCardElement(cardData) {
-  return new Card(cardData, '#cards__list-template').getView();
+  return new Card(cardData, '#cards__list-template', handleImageClick).getView();
+}
+
  /* const cardElement = cardTemplate.cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardTitleElement = cardElement.querySelector(".card__title");
@@ -116,7 +118,6 @@ function getCardElement(cardData) {
   cardImageElement.src = cardData.link;
   return cardElement;
   */
-}
 
 /* -- Form Validation -- */
 const formValidators = {};
@@ -150,7 +151,7 @@ function renderCard(cardData) {
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscape);
-  }
+}
   
 function handleEscape(evt) {
   if (evt.key === "Escape") {
@@ -160,16 +161,24 @@ function handleEscape(evt) {
 }
 
 function handleClickOverlay() {
- modals.forEach((modal) => {
-  modal.addEventListener("mousedown", (evt) => {
-    if (evt.target === modal) {
-      closeModal(modal);
-    }
+  modals.forEach((modal) => {
+    modal.addEventListener("mousedown", (evt) => {
+      if (evt.target === modal) {
+        closeModal(modal);
+      }
+    });
   });
- });
- }
+}
 
- handleClickOverlay();
+handleClickOverlay();
+
+ /*  --Popup/Image Click Functions-- */
+function handleImageClick() {
+  openModal(popupModal);
+  popupModalImage.src = cardData.link;
+  popupModalImage.alt = cardData.name;
+  popupModalTitle.textContent = cardData.name;
+}
 
 /*      ---EVENT LISTENERS---      */
 
