@@ -136,8 +136,8 @@ enableValidation(config);
 /*  --Modal Functions-- */
 
 function openModal(modal) {
-modal.classList.add("modal_opened");
-document.addEventListener("keydown", handleEscape);
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscape);
 }
 
 function renderCard(cardData) {
