@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 
 /*      ---INITIAL CARDS---     */
 
@@ -35,6 +36,16 @@ const cardData = {
 }
 
 /*    ---OPENING DECLARATIONS---    */
+
+/*  -- Config DECLARATIONS-- */
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save",
+  inactiveButtonClass: "modal__save_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
 
 const closeButtons = document.querySelectorAll(".modal__close-button");
 const modals = document.querySelectorAll(".modal");
@@ -106,6 +117,21 @@ function getCardElement(cardData) {
   return cardElement;
   */
 }
+
+/* -- Form Validation -- */
+const formValidators = {};
+
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formEl) => {
+    const validator = new FormValidator(config, formEl);
+    const formName = formEl.getAttribute('name');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  })
+}
+
+enableValidation(config);
 
 /*  --Modal Functions-- */
 
