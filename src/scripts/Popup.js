@@ -30,12 +30,13 @@ export default class Popup {
             // the form.
 
   _setEventListeners() {
-    this._popupElement.addEventListener("click", (evt) => {
-      if(evt.target.classList.contains("modal") || evt.target.classList.contains("modal__close-button")) {
+    this._popupElement.addEventListener("click", (e) => {
+      if(e.target.classList.contains("modal") 
+      || e.target.classList.contains("modal__close-button")
+      ) {
         this.close();
       }
-    })
-  }
+    });
 }
 
 // You won’t instantiate your Popup class directly in index.js; instead, you’ll instantiate its 
