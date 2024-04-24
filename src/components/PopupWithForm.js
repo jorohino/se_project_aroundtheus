@@ -17,9 +17,17 @@ export default class PopupWithForm extends Popup {
 
   // It has a private method named _getInputValues(), which collects data from all the input fields and
   // returns it as an object. This data should then be passed to the submission handler as an argument.
-
   _getInputValues() {
-    const inputValues = {};
+    const formData = {};
+    this._inputs = this._popupForm.querySelectorAll("input");
+    this._inputs.forEach((input) => {
+      formData[input.name] = input.value;
+    });
+
+    return formData;
+  }
+  /*_getInputValues() {
+    const formData = {};
     this._inputList = this._popupForm.querySelectorAll(".modal__input");
     this._inputList.forEach((inputEl) => {
       inputValues[inputEl.name] = inputEl.value;
@@ -27,7 +35,7 @@ export default class PopupWithForm extends Popup {
 
     return inputValues;
   }
-
+*/
   // It overrides the setEventListeners() parent method. The setEventListeners() method of the PopupWithForm
   // class should add a submit event listener to the form and call the setEventListeners() method of the
   // parent class.
