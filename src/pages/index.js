@@ -40,9 +40,7 @@ const profilePopup = new PopupWithForm("#edit-modal", (formData) => {
 profilePopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm("#add-modal", (formData) => {
-  const name = formData.title;
-  const link = formData.link;
-  handleAddCardSubmit(name, link);
+  handleAddCardSubmit(formData);
 });
 addCardPopup.setEventListeners();
 
@@ -67,15 +65,15 @@ function createCard(cardData) {
   const card = new Card(cardData, "#cards__list-template", handleImageClick);
   return card.getView();
 }
+
 /*  --Modal handlers--  */
 
 function handleImageClick({ name, link }) {
   popupWithImage.open({ name, link });
 }
 
-function handleAddCardSubmit() {
-  const name = cardTitleInput.value;
-  const link = cardURLInput.value;
+function handleAddCardSubmit(formData) {
+  const { title: name, url: link } = formData;
 
   const cardElement = createCard({ name, link });
   cardSection.addItem(cardElement);
@@ -87,8 +85,10 @@ function handleAddCardSubmit() {
 
 editButton.addEventListener("click", () => {
   const utdUserInfo = userInfo.getUserInfo();
-  profileNameInput.value = utdUserInfo.name;
-  profileDescriptionInput.value = utdUserInfo.description.trim();
+  profilePopup.setInputValues({
+    name: utdUserInfo.name,
+    description: utdUserInfo.description.trim(),
+  });
   profilePopup.open();
 });
 
@@ -97,6 +97,7 @@ addButton.addEventListener("click", () => {
 });
 
 /*  --Form validation--  */
+
 const formValidators = {};
 
 const enableValidation = (config) => {
