@@ -4,17 +4,17 @@ import Popup from "./Popup.js";
 
 export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
-    super({popupSelector});
-    this._title = this._popupElement.querySelector(".card__title");
-    this._image = this._popupElement.querySelector(".card__image");
+    super({ popupSelector });
+    this._title = this._popupElement.querySelector(".popup-modal__title");
+    this._image = this._popupElement.querySelector(".popup-modal__image");
   }
 
-  // This class will need to override the parent’s open() method. The open() method of the PopupWithImage 
-    // class will need to accept the name and link of the card as arguments and add an image to the popup 
-      // and the corresponding image src attribute along with a caption for the image. This method should 
-        // be called in your image click handler in index.js.
+  // This class will need to override the parent’s open() method. The open() method of the PopupWithImage
+  // class will need to accept the name and link of the card as arguments and add an image to the popup
+  // and the corresponding image src attribute along with a caption for the image. This method should
+  // be called in your image click handler in index.js.
 
-  open({name, link}) {
+  open({ name, link }) {
     this._title.textContent = name;
     this._image.alt = name;
     this._image.src = link;

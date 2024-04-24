@@ -8,7 +8,6 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Around the U.S.</title>
-    <link href="./pages/index.css" type="text/css" rel="stylesheet" />
   </head>
   <body class="page">
     <div class="page__content">
@@ -16,7 +15,7 @@
         <img
           class="header__logo"
           alt="Around the U.S. logo"
-          src="./images/Logo.svg"
+          src="<%=require('./images/Logo.svg')%>"
         />
       </header>
       <main class="content">
@@ -24,7 +23,7 @@
           <img
             class="profile__pfp"
             alt="Profile picture"
-            src="./images/jacques-cousteau-pfp.jpg"
+            src="<%=require('./images/jacques-cousteau-pfp.jpg')%>"
           />
           <div class="profile__info">
             <h1 class="profile__title" id="profile__name">Jacques Cousteau</h1>
@@ -82,7 +81,12 @@
           aria-label="Close profile edit window"
         ></button>
         <h2 class="modal__title">Edit Profile</h2>
-        <form class="modal__form" id="edit-modal__form" name="edit-modal__form" novalidate>
+        <form
+          class="modal__form"
+          id="edit-modal__form"
+          name="edit-modal__form"
+          novalidate
+        >
           <input
             type="text"
             name="title"
@@ -93,10 +97,7 @@
             minlength="2"
             required
           />
-          <span
-            class="modal__error"
-            id="form__name-input-error"
-          ></span>
+          <span class="modal__error" id="form__name-input-error"></span>
           <input
             type="text"
             name="description"
@@ -107,10 +108,7 @@
             minlength="2"
             required
           />
-          <span
-            class="modal__error"
-            id="form__description-input-error"
-          ></span>
+          <span class="modal__error" id="form__description-input-error"></span>
           <button
             type="submit"
             id="edit-modal__save"
@@ -144,10 +142,7 @@
             minlength="2"
             required
           />
-          <span
-            class="modal__error"
-            id="form__title-input-error"
-          ></span>
+          <span class="modal__error" id="form__title-input-error"></span>
           <input
             type="url"
             name="url"
@@ -156,10 +151,7 @@
             placeholder="Image URL"
             required
           />
-          <span
-            class="modal__error"
-            id="form__url-input-error"
-          ></span>
+          <span class="modal__error" id="form__url-input-error"></span>
           <button
             type="submit"
             id="add-modal__save"
@@ -183,6 +175,5 @@
         <p class="popup-modal__title"></p>
       </div>
     </div>
-    <script defer src="./pages/index.js" type="module"></script>
   </body>
 </html>
