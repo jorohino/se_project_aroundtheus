@@ -60,6 +60,9 @@ export const profileDescription = document.querySelector(
   "#profile__description"
 );
 export const profileEditForm = document.forms["edit-modal__form"];
+export const profileAvatarContainer = document.querySelector(
+  ".profile__pfp-button"
+);
 
 /*  --Card List Modal DECLARATIONS--  */
 

@@ -26,6 +26,7 @@ export default class FormValidator {
 
   _hideInputError(input) {
     const errorEl = this.formEl.querySelector(`#${input.id}-error`);
+    if (!errorEl) return;
 
     input.classList.remove(this._errorClass);
     input.classList.remove(this._inputErrorClass);
@@ -35,6 +36,7 @@ export default class FormValidator {
 
   _showInputError(input, errorMessage) {
     const errorEl = this.formEl.querySelector(`#${input.id}-error`);
+    if (!errorEl) return;
 
     input.classList.add(this._errorClass);
     input.classList.add(this._inputErrorClass);

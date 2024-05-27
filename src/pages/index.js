@@ -14,6 +14,8 @@ import Section from "../components/Section.js";
 
 import UserInfo from "../components/UserInfo.js";
 
+import Api from "../components/Api.js";
+
 import {
   initialCards,
   config,
@@ -24,28 +26,89 @@ import {
   addModalForm,
   cardTitleInput,
   cardURLInput,
+  profileAvatarContainer,
 } from "../utils/constants.js";
+
+// Initialize API
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "c91d1d7e-9726-43c4-acb8-289510ab9429",
+    "Content-Type": "application/json",
+  },
+});
 
 // Initialize components
 
 const userInfo = new UserInfo({
   profileNameSelector: "#profile__name",
   profileJobSelector: "#profile__description",
+  avatarSelector: "#profile__pfp",
 });
 
 const profilePopup = new PopupWithForm("#edit-modal", (formData) => {
-  userInfo.setUserInfo(formData);
-  profilePopup.close();
+  api
+    .updateUserInfo(formData)
+    .then((res) => {
+      userInfo.setUserInfo({
+        name: res.name,
+        description: res.about,
+      });
+      profilePopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 });
 profilePopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm("#add-modal", (formData) => {
-  handleAddCardSubmit(formData);
+  api
+    .createCard(formData)
+    .then((res) => {
+      const { name, link, _id } = res;
+      const cardElement = createCard({ name, link, _id });
+      cardSection.addItem(cardElement);
+      addCardPopup.close();
+      addModalForm.reset();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 });
 addCardPopup.setEventListeners();
 
+const deletePopup = new PopupWithForm("#delete-modal", () => {
+  if (deletePopup.card) {
+    api
+      .deleteCard(deletePopup.card._id)
+      .then(() => {
+        deletePopup.card.removeCard();
+        deletePopup.close();
+      })
+      .catch((err) => {
+        console.error("Error deleting card:", err);
+      });
+  }
+});
+deletePopup.setEventListeners();
+
 const popupWithImage = new PopupWithImage("#popup-modal");
 popupWithImage.setEventListeners();
+
+const editAvatarPopup = new PopupWithForm("#edit-avatar-modal", (formData) => {
+  console.log("Updating avatar with link:", formData.avatar);
+  api
+    .updateUserAvatar({ avatar: formData.avatar })
+    .then((res) => {
+      userInfo.setAvatarUrl(res.avatar);
+      editAvatarPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
+editAvatarPopup.setEventListeners();
 
 const cardSection = new Section(
   {
@@ -62,7 +125,12 @@ cardSection.renderItems();
 
 function createCard(cardData) {
   console.log("Creating card with:", cardData);
-  const card = new Card(cardData, "#cards__list-template", handleImageClick);
+  const card = new Card(
+    cardData,
+    "#cards__list-template",
+    handleImageClick,
+    handleDeleteButton
+  );
   return card.getView();
 }
 
@@ -81,6 +149,25 @@ function handleAddCardSubmit(formData) {
   addModalForm.reset();
 }
 
+function handleDeleteButton(card) {
+  deletePopup.card = card;
+  deletePopup.open();
+}
+
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
+  const avatarLink = document.querySelector("#avatar-src").value;
+  api
+    .updateUserAvatar({ avatar: avatarLink })
+    .then((res) => {
+      userInfo.setAvatarUrl(res.avatar);
+      editAvatarPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
 /*  --Event listeners--  */
 
 editButton.addEventListener("click", () => {
@@ -96,6 +183,9 @@ addButton.addEventListener("click", () => {
   addCardPopup.open();
 });
 
+profileAvatarContainer.addEventListener("click", () => {
+  editAvatarPopup.open();
+});
 /*  --Form validation--  */
 
 const formValidators = {};
@@ -111,3 +201,31 @@ const enableValidation = (config) => {
 };
 
 enableValidation(config);
+
+/*      ---FETCH API DATA---      */
+/*  -Fetch initial data and render cards- */
+api
+  .getInitialCards()
+  .then((cards) => {
+    console.log(cards);
+    cards.forEach((card) => {
+      cardSection.addItem(createCard(card));
+    });
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+/*  -Fetch user info and set it in UserInfo-  */
+api
+  .getUserInfo()
+  .then((data) => {
+    userInfo.setUserInfo({
+      name: data.name,
+      description: data.about,
+    });
+    userInfo.setAvatarUrl(data.avatar);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
