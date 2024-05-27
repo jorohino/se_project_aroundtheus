@@ -47,6 +47,7 @@ const userInfo = new UserInfo({
 });
 
 const profilePopup = new PopupWithForm("#edit-modal", (formData) => {
+  profilePopup.setSaving(true);
   api
     .updateUserInfo(formData)
     .then((res) => {
@@ -58,6 +59,9 @@ const profilePopup = new PopupWithForm("#edit-modal", (formData) => {
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      profilePopup.setSaving(false);
     });
 });
 profilePopup.setEventListeners();
@@ -140,13 +144,22 @@ function handleImageClick({ name, link }) {
   popupWithImage.open({ name, link });
 }
 
-function handleAddCardSubmit(formData) {
-  const { title: name, url: link } = formData;
-
-  const cardElement = createCard({ name, link });
-  cardSection.addItem(cardElement);
-  addCardPopup.close();
-  addModalForm.reset();
+function handleAddCardSubmit({ title: name, url: link }) {
+  addCardPopup.setSaving(true);
+  api
+    .createCard({ name, link })
+    .then((data) => {
+      const cardElement = createCard(data);
+      cardSection.addItem(cardElement);
+      addCardPopup.close();
+      addModalForm.reset();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      addCardPopup.setSaving(false);
+    });
 }
 
 function handleDeleteButton(card) {
@@ -157,6 +170,7 @@ function handleDeleteButton(card) {
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
   const avatarLink = document.querySelector("#avatar-src").value;
+  editAvatarPopup.setSaving(true);
   api
     .updateUserAvatar({ avatar: avatarLink })
     .then((res) => {
@@ -165,6 +179,9 @@ function handleAvatarSubmit(evt) {
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      editAvatarPopup.setSaving(false);
     });
 }
 
