@@ -152,45 +152,9 @@ function handleImageClick({ name, link }) {
   popupWithImage.open({ name, link });
 }
 
-function handleAddCardSubmit({ title: name, url: link }) {
-  addCardPopup.renderLoading(true);
-  return api
-    .createCard({ name, link })
-    .then((data) => {
-      const cardElement = createCard(data);
-      cardSection.addItem(cardElement);
-      addCardPopup.close();
-      addModalForm.reset();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      addCardPopup.renderLoading(false);
-    });
-}
-
 function handleDeleteButton(card) {
   deletePopup.card = card;
   deletePopup.open();
-}
-
-function handleAvatarSubmit(evt) {
-  evt.preventDefault();
-  const avatarLink = document.querySelector("#avatar-src").value;
-  editAvatarPopup.renderLoading(true);
-  return api
-    .updateUserAvatar({ avatar: avatarLink })
-    .then((res) => {
-      userInfo.setAvatarUrl(res.avatar);
-      editAvatarPopup.close();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      editAvatarPopup.renderLoading(false);
-    });
 }
 
 /*  --Event listeners--  */
