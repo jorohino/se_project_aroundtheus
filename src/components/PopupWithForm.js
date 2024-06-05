@@ -12,10 +12,6 @@ export default class PopupWithForm extends Popup {
     this._popupSave = this._popupElement.querySelector(".modal__save");
   }
 
-  close() {
-    super.close();
-  }
-
   // It has a private method named _getInputValues(), which collects data from all the input fields and
   // returns it as an object. This data should then be passed to the submission handler as an argument.
   _getInputValues() {
