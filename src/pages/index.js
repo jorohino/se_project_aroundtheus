@@ -133,19 +133,6 @@ cardSection.renderItems();
 
 /*      ---FUNCTIONS/EVENT HANDLERS/EVENT LISTENERS---     */
 
-/*  --Card rendering functions--  */
-
-function createCard(cardData) {
-  console.log("Creating card with:", cardData);
-  const card = new Card(
-    cardData,
-    "#cards__list-template",
-    handleImageClick,
-    handleDeleteButton
-  );
-  return card.getView();
-}
-
 /*  --Modal handlers--  */
 
 function handleImageClick({ name, link }) {
@@ -155,6 +142,20 @@ function handleImageClick({ name, link }) {
 function handleDeleteButton(card) {
   deletePopup.card = card;
   deletePopup.open();
+}
+
+/*  --Card rendering functions--  */
+
+function createCard(cardData) {
+  console.log("Creating card with:", cardData);
+  const card = new Card(
+    cardData,
+    "#cards__list-template",
+    api,
+    handleImageClick,
+    handleDeleteButton
+  );
+  return card.getView();
 }
 
 /*  --Event listeners--  */
