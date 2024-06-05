@@ -9,7 +9,8 @@ export default class PopupWithForm extends Popup {
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
     this._inputs = this._popupForm.querySelectorAll("input");
-    this._popupSave = this._popupElement.querySelector(".modal__save");
+    this._submitBtn = this._popupElement.querySelector(".modal__save");
+    this._submitBtnText = this._submitBtnText.textContent;
   }
 
   // It has a private method named _getInputValues(), which collects data from all the input fields and
@@ -38,16 +39,21 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
-      this.close();
+      this._handleFormSubmit(this._getInputValues())
+        .then(() => {
+          this.close();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     });
   }
 
-  setSaving(isSaving) {
-    if (isSaving) {
-      this._popupSave.textContent = "Saving...";
+  renderLoading(isLoading, loadingText = "Saving...") {
+    if (isLoading) {
+      this._submitBtn.textContent = loadingText;
     } else {
-      this._popupSave.textContent = "Save";
+      this._submitBtn.textContent = this._submitBtnText;
     }
   }
 }
