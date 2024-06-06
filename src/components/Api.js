@@ -39,7 +39,7 @@ export default class Api {
   getInitialCards() {
     return this._request(`${this.baseUrl}/cards`, {
       headers: this.headers,
-    }).then(this._checkResponse);
+    });
   }
 
   getUserInfo() {

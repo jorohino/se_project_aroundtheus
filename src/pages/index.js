@@ -17,15 +17,11 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
 import {
-  initialCards,
+  
   config,
   editButton,
   addButton,
-  profileNameInput,
-  profileDescriptionInput,
   addModalForm,
-  cardTitleInput,
-  cardURLInput,
   profileAvatarContainer,
 } from "../utils/constants.js";
 
@@ -89,7 +85,7 @@ addCardPopup.setEventListeners();
 const deletePopup = new PopupWithForm("#delete-modal", () => {
   if (deletePopup.card) {
     return api
-      .deleteCard(deletePopup.card._id)
+      .deleteCard(deletePopup.card.getCardId())
       .then(() => {
         deletePopup.card.removeCard();
         deletePopup.close();
@@ -122,14 +118,15 @@ const editAvatarPopup = new PopupWithForm("#edit-avatar-modal", (formData) => {
 });
 editAvatarPopup.setEventListeners();
 
-const cardSection = new Section(
+/*const cardSection = new Section(
   {
-    items: initialCards,
+    items: [],
     renderer: createCard,
   },
   "#cards__list"
 );
 cardSection.renderItems();
+*/
 
 /*      ---FUNCTIONS/EVENT HANDLERS/EVENT LISTENERS---     */
 
@@ -144,6 +141,19 @@ function handleDeleteButton(card) {
   deletePopup.open();
 }
 
+function handleLikeButton(card) {
+  const isCurrentlyLiked = card.getIsLiked();
+  const likeToggle = isCurrentlyLiked ? "unlikeCard" : "likeCard";
+
+  api[likeToggle](card.getCardId())
+    .then(() => {
+      card.setIsLiked(!isCurrentlyLiked);
+    })
+    .catch((err) => {
+      console.error("Error updating like status:", err);
+    });
+}
+
 /*  --Card rendering functions--  */
 
 function createCard(cardData) {
@@ -153,7 +163,8 @@ function createCard(cardData) {
     "#cards__list-template",
     api,
     handleImageClick,
-    handleDeleteButton
+    handleDeleteButton,
+    handleLikeButton
   );
   return card.getView();
 }
@@ -194,7 +205,7 @@ enableValidation(config);
 
 /*      ---FETCH API DATA---      */
 /*  -Fetch initial data and render cards- */
-api
+/*api
   .getInitialCards()
   .then((cards) => {
     console.log(cards);
@@ -205,17 +216,19 @@ api
   .catch((err) => {
     console.error(err);
   });
-
+*/ 
 /*  -Fetch user info and set it in UserInfo-  */
-api
-  .getUserInfo()
-  .then((data) => {
-    userInfo.setUserInfo({
-      name: data.name,
-      description: data.about,
-    });
-    userInfo.setAvatarUrl(data.avatar);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+
+let cardSection;
+
+api.getInitialCards()
+.then((cards) => {
+  cardSection = new Section ({
+    items: cards,
+    renderer: createCard
+  },
+  "#cards__list"
+);
+  cardSection.renderItems();
+})
+.catch(console.error);

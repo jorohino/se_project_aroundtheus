@@ -4,7 +4,8 @@ export default class Card {
     cardSelector,
     api,
     handleImageClick,
-    handleDeleteButton
+    handleDeleteButton,
+    handleLikeButton,
   ) {
     this._name = name;
     this._link = link;
@@ -14,11 +15,34 @@ export default class Card {
     this._api = api;
     this._handleImageClick = handleImageClick;
     this._handleDeleteButton = handleDeleteButton;
+    this._handleLikeButton = handleLikeButton;
+  }
+
+  
+  getCardId() {
+    return this._id;
+  }
+
+  getIsLiked() {
+    return this._isLiked;
+  }
+
+  setIsLiked(isLiked) {
+    this._isLiked = isLiked;
+    this._renderLikes();
+  }
+
+  _renderLikes() {
+    if (this._isLiked) {
+      this._likeButton.classList.add("card__like-button_active");
+    } else {
+      this._likeButton.classList.remove("card__like-button_active");
+    }
   }
 
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
-      this.handleLikeButton();
+      this._handleLikeButton(this);
     });
 
     this._deleteButton.addEventListener("click", () => {
@@ -28,19 +52,6 @@ export default class Card {
     this._cardImageEl.addEventListener("click", () => {
       this._handleImageClick({ name: this._name, link: this._link });
     });
-  }
-
-  handleLikeButton() {
-    const likeToggle = this._isLiked ? "unlikeCard" : "likeCard";
-
-    this._api[likeToggle](this._id)
-      .then(() => {
-        this._isLiked = !card._isLiked;
-        this._likeButton.classList.toggle("card__like-button_active");
-      })
-      .catch((err) => {
-        console.error("Error updating like status:", err);
-      });
   }
 
   removeCard() {
@@ -65,9 +76,7 @@ export default class Card {
 
     this._setEventListeners();
 
-    if (this._isLiked) {
-      this._likeButton.classList.add("card__like-button_active");
-    }
+    this._renderLikes();
     return this._cardEl;
   }
 }
