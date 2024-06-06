@@ -117,16 +117,6 @@ const editAvatarPopup = new PopupWithForm("#edit-avatar-modal", (formData) => {
 });
 editAvatarPopup.setEventListeners();
 
-/*const cardSection = new Section(
-  {
-    items: [],
-    renderer: createCard,
-  },
-  "#cards__list"
-);
-cardSection.renderItems();
-*/
-
 /*      ---FUNCTIONS/EVENT HANDLERS/EVENT LISTENERS---     */
 
 /*  --Modal handlers--  */
@@ -204,19 +194,6 @@ enableValidation(config);
 
 /*      ---FETCH API DATA---      */
 /*  -Fetch initial data and render cards- */
-/*api
-  .getInitialCards()
-  .then((cards) => {
-    console.log(cards);
-    cards.forEach((card) => {
-      cardSection.addItem(createCard(card));
-    });
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-*/ 
-/*  -Fetch user info and set it in UserInfo-  */
 
 let cardSection;
 
