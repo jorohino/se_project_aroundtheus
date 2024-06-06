@@ -88,14 +88,14 @@ export default class Api {
   }
 
   likeCard(cardId) {
-    return this._request(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return this._request(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this.headers,
     });
   }
 
   unlikeCard(cardId) {
-    return this._request(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return this._request(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this.headers,
     });

@@ -17,7 +17,6 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
 import {
-  
   config,
   editButton,
   addButton,
