@@ -22,6 +22,8 @@ import {
   addButton,
   addModalForm,
   profileAvatarContainer,
+  profileEditForm,
+
 } from "../utils/constants.js";
 
 // Initialize API
@@ -51,6 +53,7 @@ const profilePopup = new PopupWithForm("#edit-modal", (formData) => {
         description: res.about,
       });
       profilePopup.close();
+      formValidators["edit-modal__form"].resetValidation();
     })
     .catch((err) => {
       console.error(err);
@@ -71,6 +74,7 @@ const addCardPopup = new PopupWithForm("#add-modal", (formData) => {
       cardSection.addItem(cardElement);
       addCardPopup.close();
       addModalForm.reset();
+      formValidators["add-modal__form"].resetValidation();
     })
     .catch((err) => {
       console.error(err);
@@ -107,6 +111,8 @@ const editAvatarPopup = new PopupWithForm("#edit-avatar-modal", (formData) => {
     .then((res) => {
       userInfo.setAvatarUrl(res.avatar);
       editAvatarPopup.close();
+      editAvatarPopup.reset();
+      formValidators["edit-avatar__form"].resetValidation();
     })
     .catch((err) => {
       console.error(err);
