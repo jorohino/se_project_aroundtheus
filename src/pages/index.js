@@ -193,6 +193,17 @@ const enableValidation = (config) => {
 enableValidation(config);
 
 /*      ---FETCH API DATA---      */
+api.getUserInfo()
+  .then((data) => {
+    userInfo.setUserInfo({
+      name: data.name,
+      description: data.about,
+    });
+    userInfo.setAvatarUrl(data.avatar);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 /*  -Fetch initial data and render cards- */
 
 let cardSection;
