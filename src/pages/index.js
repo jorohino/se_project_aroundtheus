@@ -53,7 +53,7 @@ const profilePopup = new PopupWithForm("#edit-modal", (formData) => {
         description: res.about,
       });
       profilePopup.close();
-      formValidators["edit-modal__form"].resetValidation();
+      formValidators["edit-modal__form"].disableButton();
     })
     .catch((err) => {
       console.error(err);
@@ -74,7 +74,7 @@ const addCardPopup = new PopupWithForm("#add-modal", (formData) => {
       cardSection.addItem(cardElement);
       addCardPopup.close();
       addModalForm.reset();
-      formValidators["add-modal__form"].resetValidation();
+      formValidators["add-modal__form"].disableButton();
     })
     .catch((err) => {
       console.error(err);
@@ -111,8 +111,8 @@ const editAvatarPopup = new PopupWithForm("#edit-avatar-modal", (formData) => {
     .then((res) => {
       userInfo.setAvatarUrl(res.avatar);
       editAvatarPopup.close();
-      editAvatarPopup.reset();
-      formValidators["edit-avatar__form"].resetValidation();
+      document.querySelector("#edit-avatar__form").reset();
+      formValidators["edit-avatar__form"].disableButton();
     })
     .catch((err) => {
       console.error(err);
