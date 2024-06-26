@@ -3,9 +3,10 @@
 export default class UserInfo {
   // Take an object with the selectors of two elements into the constructor: one for the profile’s name
   // element and one for its job element.
-  constructor({ profileNameSelector, profileJobSelector }) {
+  constructor({ profileNameSelector, profileJobSelector, avatarSelector }) {
     this._profileNameEl = document.querySelector(profileNameSelector);
     this._profileDescriptionEl = document.querySelector(profileJobSelector);
+    this._avatarEl = document.querySelector(avatarSelector);
   }
 
   // Have a public method named getUserInfo(), which returns an object containing information about the user.
@@ -15,11 +16,13 @@ export default class UserInfo {
     console.log(
       "Getting user info:",
       this._profileNameEl.textContent,
-      this._profileDescriptionEl.textContent
+      this._profileDescriptionEl.textContent,
+      this._avatarEl ? this._avatarEl.src : "Avatar element not found."
     );
     return {
       name: this._profileNameEl.textContent,
       description: this._profileDescriptionEl.textContent,
+      avatar: this._avatarEl,
     };
   }
 
@@ -32,5 +35,13 @@ export default class UserInfo {
     this._profileDescriptionEl.textContent = description;
   }
 
+  setAvatarUrl(avatar) {
+    console.log("Setting avatar url", avatar);
+    if (avatar) {
+      this._avatarEl.src = avatar;
+    } else {
+      console.error("Avatar element not found.");
+    }
+  }
   // Create an instance of the UserInfo class in index.js and use its methods as described.
 }

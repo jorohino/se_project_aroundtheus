@@ -9,10 +9,8 @@ export default class PopupWithForm extends Popup {
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
     this._inputs = this._popupForm.querySelectorAll("input");
-  }
-
-  close() {
-    super.close();
+    this._submitBtn = this._popupElement.querySelector(".modal__save");
+    this._submitBtnText = this._submitBtn.textContent;
   }
 
   // It has a private method named _getInputValues(), which collects data from all the input fields and
@@ -42,7 +40,14 @@ export default class PopupWithForm extends Popup {
     this._popupForm.addEventListener("submit", (e) => {
       e.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      this.close();
     });
+  }
+
+  renderLoading(isLoading, loadingText = "Saving...") {
+    if (isLoading) {
+      this._submitBtn.textContent = loadingText;
+    } else {
+      this._submitBtn.textContent = this._submitBtnText;
+    }
   }
 }

@@ -60,6 +60,9 @@ export const profileDescription = document.querySelector(
   "#profile__description"
 );
 export const profileEditForm = document.forms["edit-modal__form"];
+export const profileAvatarContainer = document.querySelector(
+  ".profile__pfp-button"
+);
 
 /*  --Card List Modal DECLARATIONS--  */
 
@@ -71,27 +74,3 @@ export const cardURLInput = document.querySelector("#form__url-input");
 export const cardsListElement = document.querySelector("#cards__list");
 export const cardTitle = document.querySelector("#card__title");
 export const cardImage = document.querySelector("#card__image");
-
-/* Early Version Declarations -- DEAD */
-
-/* const closeButtons = document.querySelectorAll(".modal__close-button");
-
-const profileEditSubmit = document.querySelector("#edit-modal__save");
-const editModalCloseButton = editModal.querySelector(
-  "#edit-modal__close-button"
-);
-
-const addModalCloseButton = document.querySelector("#add-modal__close-button");
-const addModalSaveButton = document.querySelector("#add-modal__save");
-
-const popupModal = document.querySelector("#popup-modal");
-const popupModalCloseButton = document.querySelector(
-  "#popup-modal__close-button"
-);
-const popupModalImage = document.querySelector(".popup-modal__image");
-const popupModalTitle = document.querySelector(".popup-modal__title");
-
-const cardTemplate = cardsListElement
-  .querySelector("#cards__list-template")
-  .content.querySelector(".card");
-*/

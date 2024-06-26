@@ -5,6 +5,13 @@
   margin: 0 auto;
 }
 
+.profile__pfp-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .profile__pfp {
   width: 120px;
   height: 120px;
@@ -13,6 +20,30 @@
   background-position: center;
   margin: 0;
   margin-right: 24px;
+}
+
+.profile__pfp-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  background-color: transparent;
+  box-sizing: content-box;
+  border: none;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 0;
+  left: 0;
+  padding: 0;
+}
+
+.profile__pfp-container:hover .profile__pfp-button {
+  background: url(../images/edit__pfp.svg) center no-repeat;
+  visibility: visible;
+  background-color: black;
+  cursor: pointer;
+  opacity: 0.6;
 }
 
 .profile__info {
